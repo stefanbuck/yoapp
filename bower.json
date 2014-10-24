@@ -1,0 +1,16 @@
+{
+  "name": "YoApp",
+  "version": "0.0.0",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "zepto": "~1.1.4"
+  }
+}

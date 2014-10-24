@@ -1,0 +1,7 @@
+.*.swp
+.swp
+out
+node_modules
+.idea
+app/bower_components
+.DS_Store
