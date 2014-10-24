@@ -11,6 +11,7 @@
     "tests"
   ],
   "dependencies": {
-    "zepto": "~1.1.4"
+    "zepto": "~1.1.4",
+    "bootstrap": "~3.2.0"
   }
 }

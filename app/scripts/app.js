@@ -2,14 +2,47 @@
 
 var _ = require('lodash');
 
+var $generator = $('#generator-name');
+var $subGenerator = $('#sub-generator-name');
+var $btnRun = $('#btn-run');
+var $log = $('#log');
+var $prompts = $('#prompts');
+var $step1 = $('#step1');
+var $step2 = $('#step2');
+
+var updateSelect = function($el, list) {
+  $el.empty();
+  _.each(list, function(item) {
+    $el.append('<option name="'+ item +'">' + item + '</option>');
+  });
+};
+
 var GUIAdapter = module.exports = function GUIAdapter() {};
 
 GUIAdapter.prototype.log = function log(msg) {
-  $('pre').append(msg);
+  $log.append(msg.replace(/\n/gm, '<br>'));
 };
 
 GUIAdapter.prototype.prompt = function prompt (prompts) {
-  $('pre').append(JSON.stringify(prompts, null, ' '));
+
+
+  _.each(prompts, function(prompt) {
+    var $formElement;
+
+    if (!prompt.type || prompt.type === 'input') {
+      $formElement = $('<div class="form-group"><label for="' + prompt.name + '">' + prompt.message + '</label><input type="text" class="form-control" id="' + prompt.name + '" placeholder="' + (prompt.default || '') + '"></div>');
+    }
+    else if (prompt.type === 'list') {
+      $formElement = $('<div class="form-group generator"><label for="' + prompt.name + '">' + prompt.message + '</label><select class="form-control" id="' + prompt.name + '"></select></div>');
+      updateSelect($formElement.find('select'), prompt.choices);
+    } else {
+      $formElement = '<div class="alert alert-warning">Not supported yet! <pre>' + JSON.stringify(prompt, null, ' ') + '</pre></div>';
+    }
+
+    if ($formElement) {
+      $prompts.append($formElement);
+    }
+  });
 };
 
 GUIAdapter.prototype._colorDiffAdded = [42, 49];
@@ -38,12 +71,9 @@ env.getNpmPaths = function() {
   return ['/usr/local/lib/node_modules'];
 };
 
-var updateSelect = function($el, list) {
-  $el.empty();
-  _.each(list, function(item) {
-    $el.append('<option name="'+ item +'">' + item + '</option>');
-  });
-};
+$('#btn-back').on('click', function() {
+  window.location.reload();
+});
 
 env.lookup(function () {
 
@@ -58,12 +88,10 @@ env.lookup(function () {
     });
   });
 
-  var $generator = $('#generator');
-  var $subGenerator = $('#subGenerator');
-  var $btnRun = $('#btnRun');
-
   $btnRun.on('click', function() {
-    $('pre').empty();
+    $step1.addClass('hide');
+    $step2.removeClass('hide');
+
     var gen = $generator.val();
     var subGen = $subGenerator.val();
     if (gen && subGen) {
@@ -72,7 +100,7 @@ env.lookup(function () {
   });
 
   $generator.on('change', function() {
-    $('pre').empty();
+    $log.empty();
     $btnRun.removeAttr('disabled');
     updateSelect($subGenerator, list[this.value]);
   });
