@@ -7,39 +7,19 @@
 <body>
   <div class="container">
     <h2>YoApp</h2>
-    <div class="panel panel-default" id="step1">
-      <div class="panel-heading">Choose a generator</div>
+
+    <div class="panel panel-default hide">
+      <div class="panel-heading">Log</div>
+      <div class="panel-body" ><pre id="log"></pre>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Prompts</div>
       <div class="panel-body">
-          <!--<div class="form-group">
-            <label for="directory">Directory</label>
-            <input type="file" id="directory">
-            <p class="help-block">Please choose the directory in which you want to scaffold.</p>
-          </div>-->
-          <div class="form-group generator">
-            <label for="generator-name">Generator</label>
-            <select class="form-control" id="generator-name"></select>
-          </div>
-          <div class="form-group sub-generator">
-            <label for="sub-generator-name">Sub-Generator</label>
-            <select class="form-control" id="sub-generator-name"></select>
-          </div>
-          <button type="submit" class="btn btn-default" id="btn-run" disabled>Run</button>
+        <form id="prompts"></form>
       </div>
     </div>
-
-    <div id="step2" class="hide">
-      <div class="panel panel-default">
-        <div class="panel-heading">Log</div>
-        <div class="panel-body" ><pre id="log"></pre>
-        </div>
-      </div>
-      <div class="panel panel-default">
-        <div class="panel-heading">Prompts</div>
-        <div class="panel-body" id="prompts"></div>
-      </div>
-      <button class="btn btn-default" id="btn-back">Back</button>
-    </div>
-
 
   </div>
 </div>
