@@ -8,13 +8,25 @@ var callback = null;
 var GUIAdapter = module.exports = function GUIAdapter() {};
 
 var log = function log(msg) {
-  $log.append(msg.replace(/\n/gm, '<br>'));
+  $log.append(msg.replace(/\n/gm, '<br>') + '<br/>');
 };
 
 GUIAdapter.prototype.log = log;
+GUIAdapter.prototype.log.emit = log;
+
+GUIAdapter.prototype.write = log;
+GUIAdapter.prototype.writeln = log;
+GUIAdapter.prototype.ok = log;
+GUIAdapter.prototype.error = log;
+GUIAdapter.prototype.table = log;
+GUIAdapter.prototype.log.skip = log;
+GUIAdapter.prototype.log.force = log;
 GUIAdapter.prototype.log.create = log;
+GUIAdapter.prototype.log.invoke = log;
 GUIAdapter.prototype.log.conflict = log;
 GUIAdapter.prototype.log.identical = log;
+GUIAdapter.prototype.log.info = log;
+
 
 GUIAdapter.prototype.prompt = function prompt (prompts, cb) {
   // TODO find out why this is needed
