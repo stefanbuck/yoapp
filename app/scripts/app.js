@@ -53,8 +53,14 @@ function init(cwd) {
 }
 
 $folder.on('click', function() {
-  dialog.showOpenDialog(remote.getCurrentWindow(), {defaultPath: '/', properties: ['createDirectory', 'openDirectory']} , function(selectedPath) {
-    init(selectedPath[0]);
+
+  var defaultPath = window.localStorage.getItem('defaultPath') || '';
+
+  dialog.showOpenDialog(remote.getCurrentWindow(), {defaultPath: defaultPath, properties: ['createDirectory', 'openDirectory']} , function(selectedPath) {
+    defaultPath = selectedPath[0];
+
+    window.localStorage.setItem('defaultPath', defaultPath);
+    init(defaultPath);
   });
 });
 
