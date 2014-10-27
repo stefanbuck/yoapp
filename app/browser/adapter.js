@@ -59,6 +59,9 @@ GUIAdapter.prototype.prompt = function prompt (prompts, cb) {
     }
     else if ( prompt.type === 'confirm') {
       $formElement = $('<div class="checkbox"><label><input type="checkbox" name="' + prompt.name + '">' + prompt.message + '</label></div>');
+      if (prompt.default) {
+        $formElement.find('input').attr('checked', 'checked');
+      }
     }
     else if ( prompt.type === 'checkbox') {
       $formElement = $('<div>' + prompt.message + '</div>');
