@@ -1,8 +1,5 @@
 # YoApp
 
->  This app is still under heavy development but a stable release is coming real soon!
-
-
 
 ## What is YoApp
 
